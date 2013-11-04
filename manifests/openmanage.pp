@@ -17,14 +17,7 @@ class dell::openmanage {
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => "# file managed by puppet
-/var/log/TTY_*.log {
-  missingok
-  weekly
-  notifempty
-  compress
-}
-",
+    content => template('dell/logrotate-openmanage.conf.erb')
   }
 
   file {'/etc/logrotate.d/perc5logs':
