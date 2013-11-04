@@ -182,7 +182,7 @@ SNnmxzdpR6pYJGbEDdFyZFe5xHRWSlrC3WTbzg==
 
   case $::lsbdistcodename {
     'lenny': {
-      apt::source{'dell':
+      apt::source{'dell-omsa':
         location    => 'ftp://ftp.sara.nl/pub/sara-omsa',
         release     => 'dell6',
         repos       => 'sara',
@@ -190,7 +190,7 @@ SNnmxzdpR6pYJGbEDdFyZFe5xHRWSlrC3WTbzg==
       }
     }
     'squeeze': {
-      apt::source{'dell':
+      apt::source{'dell-omsa':
         location    => "${dell::omsa_url_base}${dell::omsa_version}",
         release     => '/',
         repos       => '',
@@ -198,7 +198,7 @@ SNnmxzdpR6pYJGbEDdFyZFe5xHRWSlrC3WTbzg==
       }
     }
     default: {
-      apt::source{'dell':
+      apt::source{'dell-omsa':
         location    => 'http://linux.dell.com/repo/community/debian',
         release     => $::lsbdistcodename,
         repos       => 'openmanage',
