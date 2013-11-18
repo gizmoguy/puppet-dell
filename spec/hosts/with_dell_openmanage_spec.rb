@@ -14,34 +14,78 @@ describe 'with_dell_openmanage' do
     end
   end
 
-  context "debian wheezy" do
+  context "debian wheezy OMSA 7.0" do
     let( :facts ) {{
       :osfamily               => 'Debian',
       :operatingsystem        => 'Debian',
       :operatingsystemrelease => '7.0',
-      :lsbdistcodename        => 'wheezy'
+      :lsbdistcodename        => 'wheezy',
+      :dell_omsa_version      => '7.0'
     }}
 
     it {should contain_class('dell::openmanage::debian')}
 
     it {should contain_apt__source('dell-omsa').with_location('http://linux.dell.com/repo/community/debian')}
+    it {should contain_apt__key('22D16719').with_ensure('present')}
+    it {should contain_apt__key('34D8786F').with_ensure('present')}
     it {should contain_package('srvadmin-base').with_ensure('present')}
     it {should contain_package('srvadmin-storageservices').with_ensure('present')}
     it {should contain_package('srvadmin-omcommon').with_ensure('present')}
   end
 
-  context "debian squeeze" do
+  context "debian wheezy OMSA 6.5" do
+    let( :facts ) {{
+      :osfamily               => 'Debian',
+      :operatingsystem        => 'Debian',
+      :operatingsystemrelease => '7.0',
+      :lsbdistcodename        => 'wheezy',
+      :dell_omsa_version      => '6.5'
+    }}
+
+    it {should contain_class('dell::openmanage::debian')}
+
+    it {should contain_apt__source('dell-omsa').with_location('http://linux.dell.com/repo/community/debian')}
+    it {should contain_apt__key('22D16719').with_ensure('present')}
+    it {should contain_apt__key('34D8786F').with_ensure('present')}
+    it {should contain_apt__key('5E3D7775').with_ensure('present')}
+    it {should contain_package('srvadmin-base').with_ensure('present')}
+    it {should contain_package('srvadmin-storageservices').with_ensure('present')}
+    it {should contain_package('srvadmin-omcommon').with_ensure('present')}
+  end
+
+  context "debian squeeze OMSA 7.0" do
     let( :facts ) {{
       :osfamily               => 'Debian',
       :operatingsystem        => 'Debian',
       :operatingsystemrelease => '6.0',
       :lsbdistcodename        => 'squeeze',
-      :omsa_version           => 'OMSA_6.5'
+      :dell_omsa_version      => '7.0'
     }}
 
     it {should contain_class('dell::openmanage::debian')}
 
-    it {should contain_apt__source('dell-omsa').with_location('http://linux.dell.com/repo/community/deb/OMSA_5.4')}
+    it {should contain_apt__source('dell-omsa').with_location('http://linux.dell.com/repo/community/deb/OMSA_7.0')}
+    it {should contain_apt__key('22D16719').with_ensure('present')}
+    it {should contain_apt__key('34D8786F').with_ensure('present')}
+    it {should contain_package('srvadmin-base').with_ensure('present')}
+    it {should contain_package('srvadmin-storageservices').with_ensure('present')}
+  end
+
+  context "debian squeeze OMSA 6.5" do
+    let( :facts ) {{
+      :osfamily               => 'Debian',
+      :operatingsystem        => 'Debian',
+      :operatingsystemrelease => '6.0',
+      :lsbdistcodename        => 'squeeze',
+      :dell_omsa_version      => '6.5'
+    }}
+
+    it {should contain_class('dell::openmanage::debian')}
+
+    it {should contain_apt__source('dell-omsa').with_location('http://linux.dell.com/repo/community/deb/OMSA_6.5')}
+    it {should contain_apt__key('22D16719').with_ensure('present')}
+    it {should contain_apt__key('34D8786F').with_ensure('present')}
+    it {should contain_apt__key('5E3D7775').with_ensure('present')}
     it {should contain_package('srvadmin-base').with_ensure('present')}
     it {should contain_package('srvadmin-storageservices').with_ensure('present')}
   end
