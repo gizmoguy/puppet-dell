@@ -177,7 +177,9 @@ SNnmxzdpR6pYJGbEDdFyZFe5xHRWSlrC3WTbzg==
     default   => [
       'srvadmin-base',
       'srvadmin-storageservices',
-      'srvadmin-omcommon' ],
+      'srvadmin-omcommon',
+      'srvadmin-idracadm'
+    ],
   }
 
   case $::lsbdistcodename {
