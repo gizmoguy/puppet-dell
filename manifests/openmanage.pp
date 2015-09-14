@@ -13,7 +13,7 @@ class dell::openmanage {
   }
 
   file {'/etc/logrotate.d/openmanage':
-    ensure  => present,
+    ensure  => file,
     owner   => root,
     group   => root,
     mode    => '0644',
@@ -31,8 +31,8 @@ class dell::openmanage {
     recurse => true,
   }
 
-  case $::operatingsystem {
-    /RedHat|CentOS/: {
+  case $::osfamily {
+    'RedHat': {
 
       # openmanage is a mess to install on redhat, and recent versions
       # don't support older hardware. So puppet will install it if absent,
@@ -49,12 +49,12 @@ class dell::openmanage {
 
     }
 
-    Debian: {
+    'Debian': {
       include ::dell::openmanage::debian
     }
 
     default: {
-      err("Unsupported operatingsystem: ${::operatingsystem}.")
+      err("Unsupported operatingsystem: ${::osfamily}.")
     }
 
   }

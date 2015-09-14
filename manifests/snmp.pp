@@ -5,7 +5,7 @@
 #
 class dell::snmp {
   case $::operatingsystem {
-    Debian : {
+    'Debian' : {
       exec {'activate omsa snmp':
         command => '/etc/init.d/dataeng enablesnmp',
         unless  => '/etc/init.d/dataeng getsnmpstatus | grep -qi enabled',
