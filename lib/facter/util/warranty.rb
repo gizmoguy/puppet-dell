@@ -63,7 +63,7 @@ module Facter::Util::Warranty
         Timeout::timeout(30) {
           Facter.debug('Getting api.dell.com')
           Facter.debug("url=#{api_url}")
-          response = Facter::Util::Resolution.exec("/usr/bin/curl -ks '#{api_url}'")
+          response = Facter::Util::Resolution.exec("/usr/bin/curl --connect-timeout 5 --max-time 10 -ks '#{api_url}'")
         }
 
         json = PSON.parse(response) if response
